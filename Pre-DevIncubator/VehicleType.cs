@@ -8,22 +8,18 @@ namespace Pre_DevIncubator
 {
     public class VehicleType
     {
-        private string typeName;
-        private double taxCoefficient;
-
-        public string TypeName { get => typeName; set => typeName = value; }
-        public double TaxCoefficient { get => taxCoefficient; set => taxCoefficient = value; }
+        public string TypeName { get;  set; }
+        public double TaxCoefficient { get; set; }
     
         public VehicleType()
         {
-            typeName = string.Empty;
-            taxCoefficient = 0d;
+
         }
 
         public VehicleType(string typeName, double taxCoefficient)
         {
-            this.typeName = typeName;
-            this.taxCoefficient = taxCoefficient;
+            TypeName = typeName;
+            TaxCoefficient = taxCoefficient;
         }
 
         public void Display()

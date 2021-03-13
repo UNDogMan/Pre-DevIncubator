@@ -11,14 +11,14 @@ namespace Pre_DevIncubator.Models.Engine
         public double ElectricityConsumption { get; init; }
         public int HorsePowers { get; set; }
 
-        public ElectricalEngine(double electricityConsumption, int horsePowers):
+        public ElectricalEngine(double electricityConsumption, int battaryCapacity):
             base("Electrical", 0.1)
         {
             ElectricityConsumption = electricityConsumption;
-            HorsePowers = horsePowers;
+            HorsePowers = battaryCapacity;
         }
 
-        public double GetMaxKilometers(double batterySize) 
+        public override double GetMaxKilometers(double batterySize)
             => batterySize / ElectricityConsumption;
 
         public override string ToString() => $"Electrical,,\"{ElectricityConsumption}\",{HorsePowers}";

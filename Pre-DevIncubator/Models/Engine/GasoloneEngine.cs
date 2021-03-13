@@ -8,12 +8,12 @@ namespace Pre_DevIncubator.Models.Engine
 {
     public class GasoloneEngine : CombustionEngine
     {
-        public GasoloneEngine(double engineCapacity, double fuelConsumptionPer100, int horsePowers)
+        public GasoloneEngine(double engineCapacity, double fuelConsumptionPer100, int tankCapacity)
             : base("Gasolone", 1)
         {
             EngineCapacity = engineCapacity;
             FuelConsumptionPer100 = fuelConsumptionPer100;
-            HorsePowers = horsePowers;
+            HorsePowers = tankCapacity;
         }
         
     }

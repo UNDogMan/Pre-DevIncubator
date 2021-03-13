@@ -11,12 +11,9 @@ namespace Pre_DevIncubator.Models.Engine
         public double EngineCapacity { get; set; }
         public double FuelConsumptionPer100 { get; set; }
         public int HorsePowers { get; set; }
-
         public CombustionEngine(string typeName, double taxCoefficient) :
             base(typeName, taxCoefficient) { }
 
-        public double GetMaxKilometers(double fuelTankCapasity)
-            => fuelTankCapasity / FuelConsumptionPer100;
         public override string ToString()
             => $"{Model},\"{EngineCapacity}\",\"{FuelConsumptionPer100}\",{HorsePowers}";
 
@@ -32,6 +29,9 @@ namespace Pre_DevIncubator.Models.Engine
 
         public override int GetHashCode() => 
             HashCode.Combine(Model, TaxCoefficient, EngineCapacity, FuelConsumptionPer100, HorsePowers);
+
+        public override double GetMaxKilometers(double fuelTank)
+            => fuelTank * 100 / FuelConsumptionPer100;
     }
 }
 

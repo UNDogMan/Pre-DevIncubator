@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pre_DevIncubator.Models.Engine
 {
-    public class AbstractEngine
+    public abstract class AbstractEngine
     {
         public string Model { get; init; }
         public double TaxCoefficient { get; set; }
@@ -16,5 +16,7 @@ namespace Pre_DevIncubator.Models.Engine
             Model = model;
             TaxCoefficient = taxCoefficient;
         }
+
+        public abstract double GetMaxKilometers(double fuelTank);
     }
 }

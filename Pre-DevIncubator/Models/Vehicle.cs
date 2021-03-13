@@ -18,6 +18,7 @@ namespace Pre_DevIncubator.Models
         public int ManufactureYear { get; init; }
         public int Mileage { get; set; }
         public Color Color { get; set; }
+        public double TankCapacity { get; set; }
 
         public Vehicle()
         {
@@ -32,7 +33,8 @@ namespace Pre_DevIncubator.Models
             int weight, 
             int manufactureYear, 
             int mileage, 
-            Color color
+            Color color,
+            double tankCapacity
             )
         {
             VehicleType = vehicleType;
@@ -43,6 +45,7 @@ namespace Pre_DevIncubator.Models
             ManufactureYear = manufactureYear;
             Mileage = mileage;
             Color = color;
+            TankCapacity = tankCapacity;
         }
 
         public override string ToString() => 
@@ -71,7 +74,17 @@ namespace Pre_DevIncubator.Models
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(VehicleType, Engine, ModelName, RegistrationNumber, Weight, ManufactureYear, Mileage, Color);
+            HashCode hash = new HashCode();
+            hash.Add(VehicleType);
+            hash.Add(Engine);
+            hash.Add(ModelName);
+            hash.Add(RegistrationNumber);
+            hash.Add(Weight);
+            hash.Add(ManufactureYear);
+            hash.Add(Mileage);
+            hash.Add(Color);
+            hash.Add(TankCapacity);
+            return hash.ToHashCode();
         }
     }
 }

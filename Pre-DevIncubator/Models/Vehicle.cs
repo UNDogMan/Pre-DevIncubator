@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pre_DevIncubator
+using Pre_DevIncubator.Models.Engine;
+
+namespace Pre_DevIncubator.Models
 {
     public class Vehicle : IComparable<Vehicle>
     {
         public VehicleType VehicleType { get; init; }
+        public AbstractEngine Engine { get; init; }
         public string ModelName { get; init; }
         public string RegistrationNumber { get; set; }
         public int Weight { get; set; }
@@ -22,7 +25,8 @@ namespace Pre_DevIncubator
         }
 
         public Vehicle(
-            VehicleType vehicleType, 
+            VehicleType vehicleType,
+            AbstractEngine engine,
             string modelName, 
             string registrationNumber, 
             int weight, 
@@ -32,6 +36,7 @@ namespace Pre_DevIncubator
             )
         {
             VehicleType = vehicleType;
+            Engine = engine;
             ModelName = modelName;
             RegistrationNumber = registrationNumber;
             Weight = weight;
@@ -41,14 +46,32 @@ namespace Pre_DevIncubator
         }
 
         public override string ToString() => 
-            $"{VehicleType}, {RegistrationNumber}, {Weight}, {ManufactureYear}, {Mileage}, {Color}";
+            $"{VehicleType},{ModelName},{RegistrationNumber},{Weight},{ManufactureYear},{Mileage},{Color},{Engine}";
         
         public double GetCalcTasPerMonth() => 
-            Weight * 0.0013 + VehicleType.TaxCoefficient * 30 + 5;
+            Weight * 0.0013 + VehicleType.TaxCoefficient * Engine.TaxCoefficient * 30 + 5;
 
         public int CompareTo(Vehicle other)
         {
             return GetCalcTasPerMonth().CompareTo(other.GetCalcTasPerMonth());
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Vehicle vehicle &&
+                   VehicleType.Equals(vehicle.VehicleType) &&
+                   Engine.Equals(vehicle.Engine) &&
+                   ModelName == vehicle.ModelName &&
+                   RegistrationNumber == vehicle.RegistrationNumber &&
+                   Weight == vehicle.Weight &&
+                   ManufactureYear == vehicle.ManufactureYear &&
+                   Mileage == vehicle.Mileage &&
+                   Color == vehicle.Color;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(VehicleType, Engine, ModelName, RegistrationNumber, Weight, ManufactureYear, Mileage, Color);
         }
     }
 }

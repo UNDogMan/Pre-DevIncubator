@@ -8,11 +8,11 @@ namespace Pre_DevIncubator.Models.Engine
 {
     public class ElectricalEngine : AbstractEngine
     {
-        public double ElectricityConsumption { get; init; }
+        public double ElectricityConsumption { get; set; }
         public int HorsePowers { get; set; }
 
-        public ElectricalEngine(double electricityConsumption, int battaryCapacity):
-            base("Electrical", 0.1)
+        public ElectricalEngine(double electricityConsumption, int battaryCapacity)
+            : base("Electrical", 0.1)
         {
             ElectricityConsumption = electricityConsumption;
             HorsePowers = battaryCapacity;

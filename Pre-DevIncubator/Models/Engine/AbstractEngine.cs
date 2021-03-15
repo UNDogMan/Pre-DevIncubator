@@ -8,7 +8,7 @@ namespace Pre_DevIncubator.Models.Engine
 {
     public abstract class AbstractEngine
     {
-        public string Model { get; init; }
+        public string Model { get; set; }
         public double TaxCoefficient { get; set; }
 
         public AbstractEngine(string model, double taxCoefficient)

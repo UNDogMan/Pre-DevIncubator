@@ -10,12 +10,12 @@ namespace Pre_DevIncubator.Models
 {
     public class Vehicle : IComparable<Vehicle>
     {
-        public VehicleType VehicleType { get; init; }
-        public AbstractEngine Engine { get; init; }
-        public string ModelName { get; init; }
+        public VehicleType VehicleType { get; set; }
+        public AbstractEngine Engine { get; set; }
+        public string ModelName { get; set; }
         public string RegistrationNumber { get; set; }
         public int Weight { get; set; }
-        public int ManufactureYear { get; init; }
+        public int ManufactureYear { get; set; }
         public int Mileage { get; set; }
         public Color Color { get; set; }
         public double TankCapacity { get; set; }

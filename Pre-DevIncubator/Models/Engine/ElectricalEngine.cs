@@ -11,11 +11,11 @@ namespace Pre_DevIncubator.Models.Engine
         public double ElectricityConsumption { get; set; }
         public int HorsePowers { get; set; }
 
-        public ElectricalEngine(double electricityConsumption, int battaryCapacity)
+        public ElectricalEngine(double electricityConsumption, int horsePowers)
             : base("Electrical", 0.1)
         {
             ElectricityConsumption = electricityConsumption;
-            HorsePowers = battaryCapacity;
+            HorsePowers = horsePowers;
         }
 
         public override double GetMaxKilometers(double batterySize)

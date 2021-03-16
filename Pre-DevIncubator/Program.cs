@@ -71,6 +71,22 @@ namespace Pre_DevIncubator
             VehicleComparer comparer = new VehicleComparer();
             collection.Sort(comparer);
             collection.Print();
+
+            var queue = new CustomQueue<Vehicle>(collection.Vehicles);
+            while(queue.Count > 0)
+                Console.WriteLine("Auto{0} вымыто", queue.Dequeue().ID);
+
+            var stack = new CustomStack<Vehicle>();
+            foreach(Vehicle vehicle in collection.Vehicles)
+            {
+                Console.WriteLine("Auto{0} заехало в гараж", vehicle.ID);
+                stack.Push(vehicle);
+            }
+            Console.WriteLine("Гараж заполнен");
+            while(stack.Count > 0)
+                Console.WriteLine("Auto{0} выехало из гаража", stack.Pop().ID);
+
+
         }
     }
 }

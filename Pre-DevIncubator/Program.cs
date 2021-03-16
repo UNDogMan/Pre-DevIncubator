@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using Pre_DevIncubator.Models;
+﻿using Pre_DevIncubator.Models;
 using Pre_DevIncubator.Models.Engine;
 using Pre_DevIncubator.UserCollections;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Pre_DevIncubator
 {
@@ -21,7 +22,7 @@ namespace Pre_DevIncubator
 
             double sumTax = vehicleTypes[0].TaxCoefficient;
             VehicleType maxTaxVehicleType = vehicleTypes[0];
-            for(int i = 1; i < vehicleTypes.Length; ++i)
+            for (int i = 1; i < vehicleTypes.Length; ++i)
             {
                 vehicleTypes[i].Display();
                 if (i == vehicleTypes.Length - 1)
@@ -34,7 +35,7 @@ namespace Pre_DevIncubator
             Console.WriteLine($"Max TaxCofficient VehicleType is {maxTaxVehicleType}");
             Console.WriteLine($"Averrage TaxCofficient is {sumTax / vehicleTypes.Length}");
 
-            foreach(VehicleType vehicleType in vehicleTypes)
+            foreach (VehicleType vehicleType in vehicleTypes)
             {
                 Console.WriteLine(vehicleType.ToString());
             }
@@ -73,20 +74,40 @@ namespace Pre_DevIncubator
             collection.Print();
 
             var queue = new CustomQueue<Vehicle>(collection.Vehicles);
-            while(queue.Count > 0)
+            while (queue.Count > 0)
                 Console.WriteLine("Auto{0} вымыто", queue.Dequeue().ID);
 
             var stack = new CustomStack<Vehicle>();
-            foreach(Vehicle vehicle in collection.Vehicles)
+            foreach (Vehicle vehicle in collection.Vehicles)
             {
                 Console.WriteLine("Auto{0} заехало в гараж", vehicle.ID);
                 stack.Push(vehicle);
             }
             Console.WriteLine("Гараж заполнен");
-            while(stack.Count > 0)
+            while (stack.Count > 0)
                 Console.WriteLine("Auto{0} выехало из гаража", stack.Pop().ID);
 
-
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+            if (File.Exists(@"Data\orders.csv"))
+            {
+                var items = File.ReadAllLines(@"Data\orders.csv")
+                    .Select(x => x.Split(","));
+                foreach (var item in items)
+                {
+                    foreach (var thing in item)
+                    {
+                        string tstr = thing.Trim();
+                        if (dictionary.ContainsKey(tstr))
+                            dictionary[tstr]++;
+                        else
+                            dictionary[tstr] = 1;
+                    }
+                }
+                foreach (var item in dictionary)
+                {
+                    Console.WriteLine("{0} - {1} шт.", item.Key.FirstLetterToUpperCase(), item.Value);
+                }
+            }
         }
     }
 }

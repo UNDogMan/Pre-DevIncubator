@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pre_DevIncubator
+namespace Pre_DevIncubator.Models
 {
     public enum Color
     {

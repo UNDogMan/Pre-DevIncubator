@@ -10,6 +10,7 @@ namespace Pre_DevIncubator.Models
 {
     public class Vehicle : IComparable<Vehicle>
     {
+        public int ID { get; set; }
         public VehicleType VehicleType { get; set; }
         public AbstractEngine Engine { get; set; }
         public string ModelName { get; set; }
@@ -19,24 +20,27 @@ namespace Pre_DevIncubator.Models
         public int Mileage { get; set; }
         public Color Color { get; set; }
         public double TankCapacity { get; set; }
+        public List<Rent> Rents { get; init; }
 
         public Vehicle()
         {
-
+            Rents = new List<Rent>();
         }
 
         public Vehicle(
+            int id,
             VehicleType vehicleType,
             AbstractEngine engine,
-            string modelName, 
-            string registrationNumber, 
-            int weight, 
-            int manufactureYear, 
-            int mileage, 
+            string modelName,
+            string registrationNumber,
+            int weight,
+            int manufactureYear,
+            int mileage,
             Color color,
             double tankCapacity
-            )
+            ) : this()
         {
+            ID = id;
             VehicleType = vehicleType;
             Engine = engine;
             ModelName = modelName;
@@ -53,6 +57,12 @@ namespace Pre_DevIncubator.Models
         
         public double GetCalcTasPerMonth() => 
             Weight * 0.0013 + VehicleType.TaxCoefficient * Engine.TaxCoefficient * 30 + 5;
+
+        public double GetTotalIncome() =>
+            Rents.Sum(x => x.RentCost);
+
+        public double GetTotalProfit() =>
+            GetTotalIncome() - GetCalcTasPerMonth();
 
         public int CompareTo(Vehicle other)
         {

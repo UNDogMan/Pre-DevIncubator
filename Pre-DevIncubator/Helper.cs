@@ -15,5 +15,10 @@ namespace Pre_DevIncubator
                 Console.WriteLine(t.ToString());
             }
         }
+
+        public static string FirstLetterToUpperCase(this string input)
+        {
+            return input.First().ToString().ToUpper() + input.Substring(1);
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Pre_DevIncubator.Models
 {
     public class VehicleType
     {
+        public int ID { get; set; }
         public string TypeName { get;  set; }
         public double TaxCoefficient { get; set; }
     
@@ -16,8 +17,9 @@ namespace Pre_DevIncubator.Models
 
         }
 
-        public VehicleType(string typeName, double taxCoefficient)
+        public VehicleType(int id, string typeName, double taxCoefficient)
         {
+            ID = id;
             TypeName = typeName;
             TaxCoefficient = taxCoefficient;
         }
